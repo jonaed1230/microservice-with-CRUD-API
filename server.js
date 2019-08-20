@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require('@feathersjs/express');
 const bodyParser = require('body-parser');
 const service = require('./broker');
 
-// create express app
+// create feathers express app
 const app = express();
 
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -29,12 +29,13 @@ mongoose.connect(dbConfig.url, {
 
 // Use ApiGateway as middleware
 
+
 app.use("/", service.express());
 
 // Require Notes routes
 require('./app/routes/note.routes.js')(app);
 
 // listen for requests
-app.listen(3000, () => {
+app.listen(3001, () => {
     console.log("Server is listening on port 3000");
 });
